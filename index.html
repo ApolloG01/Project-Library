@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorri's Library</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Sorri's Library</h1>
+    </header>
+    <!-- A modal dialog containing a form -->
+    <dialog id="favDialog">
+      <form method="dialog">
+        <p>
+          <label>
+            Title:
+            <input name="title" required />
+          </label>
+        </p>
+        <p>
+          <label>
+            Author:
+            <input name="author" required />
+          </label>
+        </p>
+        <p>
+          <label>
+            Pages:
+            <input name="pages" required />
+          </label>
+        </p>
+        <p>
+          <label>
+            Read:
+            <input type="checkbox" name="read" />
+          </label>
+        </p>
+        <p>
+          <label> Notes: <input name="notes" /> </label>
+        </p>
+        <p class="buttons">
+          <button type="submit" value="confirm">Confirm</button>
+          <button id="closeDialog" value="cancel">Cancel</button>
+        </p>
+      </form>
+    </dialog>
+
+    <output></output>
+    <div class="wrapper">
+      <div class="container"></div>
+      <footer class="footer"></footer>
+      <script src="script.js"></script>
+    </div>
+  </body>
+</html>

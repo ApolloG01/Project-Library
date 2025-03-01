@@ -1,0 +1,204 @@
+@import "modern-normalize";
+
+:root {
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+figure,
+p,
+ol,
+ul {
+  margin: 0;
+}
+
+ol[role="list"],
+ul[role="list"] {
+  list-style: none;
+  padding-inline: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+img {
+  display: block;
+  max-inline-size: 100%;
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 3.6rem;
+  font-weight: 700;
+  text-shadow: #000 2px 2px;
+}
+h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+p {
+  font-size: 1.6rem;
+}
+body {
+  background-image: url("images/library.jpeg");
+  background-repeat: no-repeat;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
+  margin: 0 auto;
+  height: 100vh;
+}
+.container {
+  display: grid;
+  padding: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  justify-items: center;
+}
+
+.card {
+  background-color: #000;
+  width: 22rem;
+  height: auto;
+  padding: 2rem;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 0.6rem;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2),
+    0 6px 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s;
+  opacity: 0.9;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.card p {
+  margin: 0.5rem 0;
+}
+
+.delete {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete button {
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  height: 3rem;
+  width: 3rem;
+  transition: background-color 0.2s;
+}
+
+.delete button:hover {
+  opacity: 0.6;
+}
+
+.card:hover {
+  opacity: 1;
+  cursor: pointer;
+  transform: translateY(-5px);
+}
+
+.addBook {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: #000;
+  width: 22rem;
+  height: 14rem;
+  border-radius: 5rem;
+  padding: 2rem;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2),
+    0 6px 20px rgba(255, 255, 255, 0.2);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  gap: 2rem;
+}
+
+.addBook button {
+  font-size: 2rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#addBook {
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 100px;
+  font-weight: bold;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.addBook:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem;
+}
+
+#delete {
+  width: 3.2rem;
+  background-color: #ff0000;
+  color: #fff;
+  float: right;
+}
