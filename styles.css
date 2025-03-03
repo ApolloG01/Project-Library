@@ -56,7 +56,6 @@ h1 {
   font-weight: 700;
   text-shadow: #000 2px 2px;
   margin: 0;
-  padding-top: 2rem;
 }
 h2 {
   font-size: 1.8rem;
@@ -73,12 +72,7 @@ body {
   flex-direction: column;
   justify-content: center;
 }
-.wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
