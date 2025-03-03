@@ -52,9 +52,10 @@ img {
 h1 {
   color: #fff;
   text-align: center;
-  font-size: 3.6rem;
+  font-size: 5rem;
   font-weight: 700;
   text-shadow: #000 2px 2px;
+  margin: 0;
 }
 h2 {
   font-size: 1.8rem;
@@ -79,7 +80,6 @@ body {
 }
 .container {
   display: grid;
-  padding: 3rem;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   gap: 2rem;
   padding: 1rem;
