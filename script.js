@@ -6,13 +6,14 @@ const closeDialogButton = document.querySelector("#close-dialog");
 
 const myLibrary = [];
 
-// Book constructor
-function Book(title, author, pages, read, notes) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.notes = notes || "No notes";
+class Book {
+  constructor(title, author, pages, read, notes) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.notes = notes || "No notes";
+  }
 }
 
 // Add book to library
@@ -170,3 +171,12 @@ dialogX.addEventListener("close", () => {
     form.reset();
   }
 });
+
+const func = (x) => {
+  let a = 17;
+  a = x;
+
+  console.log(a);
+};
+
+func(99);
