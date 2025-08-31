@@ -2,7 +2,15 @@
 
 const dialogX = document.querySelector("dialog");
 const container = document.querySelector(".container");
-const closeDialogButton = document.querySelector("#close-dialog");
+const cancelButton = document.querySelector('button[value="cancel"]');
+const form = document.querySelector("form");
+const inputs = document.querySelectorAll("input[required]");
+
+// Add error spans for each input
+inputs.forEach((input) => {
+  input.addEventListener("input", validateField);
+  input.addEventListener("invalid", handleInvalid);
+});
 
 const myLibrary = [];
 
@@ -72,7 +80,7 @@ addBookToLibrary(
 );
 addBookToLibrary(
   new Book(
-    "Banksy<br/> The man behind the wall",
+    "Banksy: The man behind the wall",
     "Will Ellsworth-Jones",
     302,
     true,
@@ -81,7 +89,7 @@ addBookToLibrary(
 );
 addBookToLibrary(
   new Book(
-    "Professional Javascript for<br/> Web Developers",
+    "Professional Javascript for Web Developers",
     "Nicholas C. Zakas",
     1111,
     true,
@@ -99,17 +107,19 @@ function displayBooks() {
     container.insertAdjacentHTML(
       "beforeend",
       `
-    <div class="card">
-    <div class="delete">
-      <button id="delete" data-delete-${index}>x</button>
-    </div>
-      <h2>${book.title}</h2>
-      <p>Author: ${book.author}</p>
-      <p>Pages: ${book.pages}</p>
-      <p>Read: ${book.read}</p>
-      <p>Notes: ${book.notes}</p>
-    </div>
-  `
+          <div class="card">
+            <div class="delete">
+              <button id="delete" data-delete="${index}">x</button>
+            </div>
+            <h2>${book.title}</h2>
+            <p>Author: ${book.author}</p>
+            <p>Pages: ${book.pages}</p>
+            <p>Read: <span class="read-status ${
+              book.read ? "read-true" : "read-false"
+            }">${book.read ? "Yes" : "No"}</span></p>
+            <p>Notes: ${book.notes}</p>
+          </div>
+        `
     );
   }
 
@@ -119,10 +129,6 @@ function displayBooks() {
     button.addEventListener("click", function () {
       const index = button.dataset.delete;
       myLibrary.splice(index, 1);
-
-      // Clear container
-      container.innerHTML = "";
-
       displayBooks();
     });
   });
@@ -131,52 +137,111 @@ function displayBooks() {
   container.insertAdjacentHTML(
     "beforeend",
     `
-  <div class="addBook">
-    <button id="addBook">+</button>
-  </div>
-`
+        <div class="addBook">
+          <button id="addBook">+</button>
+        </div>
+      `
   );
 
   const addBookButton = document.querySelector("#addBook");
 
   addBookButton.addEventListener("click", function () {
+    form.reset();
+    clearErrors();
     dialogX.showModal();
   });
 }
-displayBooks();
 
-// Handle form submission
+// Custom validation functions
+function validateField(e) {
+  const field = e.target;
+  const errorElement = document.getElementById(`${field.id}-error`);
+
+  // Clear previous error
+  field.setCustomValidity("");
+
+  // Check validity
+  if (field.validity.valid) {
+    errorElement.textContent = "";
+    field.style.borderColor = "#ced6e0";
+  } else {
+    showError(field);
+  }
+}
+
+function handleInvalid(e) {
+  e.preventDefault();
+  showError(e.target);
+}
+
+function showError(field) {
+  const errorElement = document.getElementById(`${field.id}-error`);
+
+  if (field.validity.valueMissing) {
+    field.setCustomValidity(`Please enter the ${field.name}`);
+  } else if (field.validity.rangeUnderflow && field.id === "pages") {
+    field.setCustomValidity("Book must have at least 1 page");
+  } else {
+    field.setCustomValidity(`Invalid value for ${field.name}`);
+  }
+
+  errorElement.textContent = field.validationMessage;
+  field.style.borderColor = "#ff4757";
+}
+
+function clearErrors() {
+  const errorElements = document.querySelectorAll(".error");
+  errorElements.forEach((el) => {
+    el.textContent = "";
+  });
+
+  inputs.forEach((input) => {
+    input.style.borderColor = "#ced6e0";
+    input.setCustomValidity("");
+  });
+}
+
+function validateForm() {
+  let isValid = true;
+
+  inputs.forEach((input) => {
+    if (!input.validity.valid) {
+      showError(input);
+      isValid = false;
+    }
+  });
+
+  return isValid;
+}
+
+// Form submission handling
+form.addEventListener("submit", (event) => {
+  if (!validateForm()) {
+    event.preventDefault();
+  }
+});
+
 dialogX.addEventListener("close", () => {
   if (dialogX.returnValue === "confirm") {
-    console.log(dialogX.returnValue);
-
-    const formData = new FormData(dialogX.querySelector("form"));
-    console.log("Form data:", formData);
+    const formData = new FormData(form);
 
     const title = formData.get("title");
     const author = formData.get("author");
     const pages = formData.get("pages");
-    const read = formData.get("read") ? "Yes" : "No";
+    const read = formData.get("read") ? true : false;
     const notes = formData.get("notes");
-
-    console.log("Form data:", { title, author, pages, read, notes });
 
     const newBook = new Book(title, author, pages, read, notes);
     addBookToLibrary(newBook);
 
-    container.innerHTML = "";
-
     displayBooks();
-
-    form.reset();
   }
 });
 
-const func = (x) => {
-  let a = 17;
-  a = x;
+// Cancel button
+cancelButton.addEventListener("click", function () {
+  dialogX.close("cancel");
+});
 
-  console.log(a);
-};
-
-func(99);
+// Initial display of books
+displayBooks();

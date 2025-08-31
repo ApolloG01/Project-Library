@@ -15,39 +15,41 @@
       <h1>Sorri's Library</h1>
     </header>
     <!-- A modal dialog containing a form -->
-    <dialog id="favDialog">
-      <form method="dialog">
-        <p>
-          <label>
-            Title:
-            <input name="title" required />
-          </label>
-        </p>
-        <p>
-          <label>
-            Author:
-            <input name="author" required />
-          </label>
-        </p>
-        <p>
-          <label>
-            Pages:
-            <input name="pages" required />
-          </label>
-        </p>
-        <p>
-          <label>
-            Read:
-            <input type="checkbox" name="read" />
-          </label>
-        </p>
-        <p>
-          <label> Notes: <input name="notes" /> </label>
-        </p>
-        <p class="buttons">
-          <button type="submit" value="confirm">Confirm</button>
-          <button id="closeDialog" value="cancel">Cancel</button>
-        </p>
+    <dialog>
+      <h2 style="margin-bottom: 20px">Add a New Book</h2>
+      <form method="dialog" novalidate>
+        <div class="form-group">
+          <label for="title">Title *</label>
+          <input type="text" id="title" name="title" required />
+          <div class="error" id="title-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author *</label>
+          <input type="text" id="author" name="author" required />
+          <div class="error" id="author-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="pages">Pages *</label>
+          <input type="number" id="pages" name="pages" min="1" required />
+          <div class="error" id="pages-error"></div>
+        </div>
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="read" name="read" />
+          <label for="read">Have you read this book?</label>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="3"></textarea>
+        </div>
+
+        <div class="buttons">
+          <button type="button" value="cancel">Cancel</button>
+          <button type="submit" value="confirm">Add Book</button>
+        </div>
       </form>
     </dialog>
 
